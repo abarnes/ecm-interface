@@ -1,0 +1,35 @@
+{
+  "name": "ecm-interface",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Austin Barnes <austin@austinbarnes.net>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack -p",
+    "dev": "webpack-dev-server --hot --inline"
+  },
+  "dependencies": {
+    "bindings": "^1.3.0",
+    "bleno": "^0.5.0",
+    "bufferutil": "^4.0.0",
+    "convert-hex": "^0.1.0",
+    "fs-finder": "^1.8.1",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.20.1",
+    "save": "^2.3.2",
+    "serialport": "^6.2.2",
+    "utf-8-validate": "^5.0.1",
+    "ws": "^5.2.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "native-ext-loader": "^2.1.0",
+    "node-bitarray": "^0.1.0",
+    "node-loader": "^0.6.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
