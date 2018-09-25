@@ -11,6 +11,7 @@ export const startServer = () => {
 
     server.on('connection', function connection(ws) {
         console.log("Websocket: connection");
+        ws.id = sockets.length + 1;
         sockets.push(ws);
 
         ws.on('message', function incoming(message) {
@@ -22,14 +23,22 @@ export const startServer = () => {
 
             // TODO handle this stuff
         });
+
+        ws.on("close", function close() {
+            const socketClosing = sockets.filter(socket => ws.id === socket.id);
+            if (socketClosing.length) {
+                sockets = sockets.splice(sockets.indexOf(socketClosing[0]), 1);
+                console.log("Socket with id " + socketClosing[0].id + " closing");
+            }
+        });
     });
 }
 
 const stateChangeCallback = function stateChangeCallback(state) {
-    // console.log("Websocket: sending updated state ", state);
-
     sockets.forEach(socket => {
-        socket.send(wsData("data_update", state));
+        if (socket.readyState === 1) {
+            socket.send(wsData("data_update", state));
+        }
     });
 }
 
