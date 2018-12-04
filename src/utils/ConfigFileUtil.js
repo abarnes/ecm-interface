@@ -1,15 +1,18 @@
 import fs from 'fs'
 import os from "os"
 import defaultThresholdConfig from '../config/DefaultThresholdConfig'
+import defaultLayoutConfig from '../config/DefaultLayoutConfig'
 import Finder from 'fs-finder'
 
 const CONFIG_DIR_NAME = "PowerFC-Config";
 const THRESHOLD_CONFIG_FILE_NAME = "thresholds.json";
+const LAYOUT_CONFIG_FILE_NAME = "layout.json";
 const MAC_DRIVE_DIRECTORY = "/VOLUMES";
 const WINDOWS_DRIVE_DIRECTORY = "";
 const LINUX_DRIVE_DIRECTORY = "/media/pi";
 
 let cachedThresholds = null;
+let cachedLayout = null;
 
 export const getThresholdConfig = () => {
     cachedThresholds = findConfigFileByName(THRESHOLD_CONFIG_FILE_NAME);
@@ -17,6 +20,14 @@ export const getThresholdConfig = () => {
         cachedThresholds = defaultThresholdConfig;
     }
     return cachedThresholds;
+}
+
+export const getLayoutConfig = () => {
+    cachedLayout = findConfigFileByName(LAYOUT_CONFIG_FILE_NAME);
+    if (!cachedLayout) {
+        cachedLayout = defaultLayoutConfig;
+    }
+    return cachedLayout;
 }
 
 const findConfigFileByName = (name) => {

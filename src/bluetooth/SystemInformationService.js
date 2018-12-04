@@ -6,6 +6,7 @@ import LoadAverageCharacteristic from './characteristics/LoadAverage'
 import EngineDataCharacteristic from './characteristics/EngineData'
 import GpsReceiverCharacteristic from './characteristics/GpsReceiver'
 import ThresholdConfigCharacteristic from './characteristics/ThresholdConfig'
+import LayoutConfigCharacteristic from './characteristics/LayoutConfig'
 
 function SystemInformationService() {
 
@@ -15,7 +16,9 @@ function SystemInformationService() {
       new EngineDataCharacteristic(),
       // new LoadAverageCharacteristic(),
       new GpsReceiverCharacteristic(),
-      new ThresholdConfigCharacteristic
+      new ThresholdConfigCharacteristic(),
+      new LayoutConfigCharacteristic(),
+
     ]
   });
 };
