@@ -18,7 +18,6 @@ const stateChange = (state) => {
     console.log('Bluetooth: on -> stateChange: ' + state);
     if (state === 'poweredOn') {
         bleno.startAdvertising(bleno.name, [systemInformation.uuid]);
-        console.log("should start...");
     } else {
         bleno.stopAdvertising();
     }
