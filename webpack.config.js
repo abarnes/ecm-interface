@@ -17,7 +17,8 @@ module.exports = {
         "bluetooth-hci-socket": "bluetooth-hci-socket",
         "serialport": "serialport",
         "bufferutil": "bufferutil",
-        "utf-8-validate": "utf-8-validate"
+        "utf-8-validate": "utf-8-validate",
+        "xpc-connection": "xpc-connection"
     },
     resolve: {
         extensions: ['.js', '.json', '.node']
