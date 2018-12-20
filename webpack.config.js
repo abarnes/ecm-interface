@@ -1,6 +1,7 @@
 // This library allows us to combine paths easily
 const path = require('path');
 
+
 module.exports = {
     target: 'node',
     optimization: {
