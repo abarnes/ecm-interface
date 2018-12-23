@@ -1,8 +1,8 @@
 import bleno from 'bleno';
-import { SystemInformationService } from './SystemInformationService'
+import { SystemService } from './SystemService'
 import EngineDataCharacteristic from './characteristics/EngineData'
 
-const systemInformation = new SystemInformationService();
+const systemService = new SystemService();
 
 const init = () => {
     bleno.on('stateChange', stateChange);
@@ -17,7 +17,7 @@ const logEngineData = (time, data) => {
 const stateChange = (state) => {
     console.log('Bluetooth: on -> stateChange: ' + state);
     if (state === 'poweredOn') {
-        bleno.startAdvertising(bleno.name, [systemInformation.uuid]);
+        bleno.startAdvertising(bleno.name, [systemService.uuid]);
     } else {
         bleno.stopAdvertising();
     }
@@ -27,7 +27,7 @@ const advertisingStart = (error) => {
     console.log('Bluetooth: advertisingStart ' + (error ? 'error ' + error : 'success')); 
     if (!error) {
         bleno.setServices([
-            systemInformation
+            systemService
         ]);
     }
 };

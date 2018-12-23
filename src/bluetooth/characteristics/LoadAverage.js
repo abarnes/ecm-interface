@@ -36,7 +36,9 @@ LoadAverageCharacteristic.prototype.onReadRequest = function(offset, callback) {
 };
 
 function getLoadBuffer() {
+  // TODO remove this hack
   return new Buffer.from("itsastringasfdnasdfjlkhhjlhjklhjeawlruyiuewhuihjlkhl&&hjlkhasfhjhuiweiuewuhiuihewhuirhjfhkhjkdshjsdl!", 'utf8');
+  
   let loadAverage = os.loadavg().map(function(currentValue, index, array){
     return currentValue.toFixed(3);
   });

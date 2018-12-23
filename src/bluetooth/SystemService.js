@@ -8,7 +8,7 @@ import GpsReceiverCharacteristic from './characteristics/GpsReceiver'
 import ThresholdConfigCharacteristic from './characteristics/ThresholdConfig'
 import LayoutConfigCharacteristic from './characteristics/LayoutConfig'
 
-function SystemInformationService() {
+function SystemService() {
 
   Bleno.PrimaryService.call(this, {
     uuid: 'f9d53a38-2324-11e8-b467-0ed5f89f718b',
@@ -23,6 +23,6 @@ function SystemInformationService() {
   });
 };
 
-Util.inherits(SystemInformationService, Bleno.PrimaryService);
+Util.inherits(SystemService, Bleno.PrimaryService);
 
-export { SystemInformationService }
+export { SystemService }
