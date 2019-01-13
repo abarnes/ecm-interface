@@ -1,4 +1,4 @@
-import bleno from 'bleno';
+import bleno from 'bleno-mac';
 import os from 'os';
 import util from 'util';
 
@@ -38,7 +38,7 @@ LoadAverageCharacteristic.prototype.onReadRequest = function(offset, callback) {
 function getLoadBuffer() {
   // TODO remove this hack
   return new Buffer.from("itsastringasfdnasdfjlkhhjlhjklhjeawlruyiuewhuihjlkhl&&hjlkhasfhjhuiweiuewuhiuihewhuirhjfhkhjkdshjsdl!", 'utf8');
-  
+
   let loadAverage = os.loadavg().map(function(currentValue, index, array){
     return currentValue.toFixed(3);
   });

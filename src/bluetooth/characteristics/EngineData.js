@@ -3,7 +3,7 @@ import Bleno from 'bleno'
 import Util from 'util'
 
 export default (function(){
-    let lastDataPoint = null;
+    // let lastDataPoint = null;
     let bluetoothCallback = null;
 
     let BlenoCharacteristic = Bleno.Characteristic;

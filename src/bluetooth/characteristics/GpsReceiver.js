@@ -1,4 +1,4 @@
-import bleno from 'bleno';
+import bleno from 'bleno-mac';
 import util from 'util';
 
 const characteristic = (function(){

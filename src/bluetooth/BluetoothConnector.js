@@ -1,4 +1,4 @@
-import bleno from 'bleno';
+import bleno from 'bleno-mac';
 import { SystemService } from './SystemService'
 import EngineDataCharacteristic from './characteristics/EngineData'
 
@@ -17,7 +17,7 @@ const logEngineData = (time, data) => {
 const stateChange = (state) => {
     console.log('Bluetooth: on -> stateChange: ' + state);
     if (state === 'poweredOn') {
-        bleno.startAdvertising(bleno.name, [systemService.uuid]);
+        bleno.startAdvertising("ecm-interface", [systemService.uuid]);
     } else {
         bleno.stopAdvertising();
     }

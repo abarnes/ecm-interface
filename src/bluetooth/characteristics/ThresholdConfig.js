@@ -1,5 +1,5 @@
 import { getThresholdConfig } from "../../utils/ConfigFileUtil";
-import bleno from 'bleno';
+import bleno from 'bleno-mac';
 import util from 'util';
 
 let BlenoCharacteristic = bleno.Characteristic;

@@ -1,12 +1,12 @@
 import Bleno from 'bleno'
 import Util from 'util'
 
-
 import LoadAverageCharacteristic from './characteristics/LoadAverage'
 import EngineDataCharacteristic from './characteristics/EngineData'
 import GpsReceiverCharacteristic from './characteristics/GpsReceiver'
 import ThresholdConfigCharacteristic from './characteristics/ThresholdConfig'
 import LayoutConfigCharacteristic from './characteristics/LayoutConfig'
+import ShutdownCharacteristic from './characteristics/Shutdown'
 
 function SystemService() {
 
@@ -18,7 +18,7 @@ function SystemService() {
       new GpsReceiverCharacteristic(),
       new ThresholdConfigCharacteristic(),
       new LayoutConfigCharacteristic(),
-
+      new ShutdownCharacteristic()
     ]
   });
 };

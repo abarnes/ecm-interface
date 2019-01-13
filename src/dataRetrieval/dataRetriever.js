@@ -8,7 +8,7 @@ let hasReceivedValidData = false;
 
 let updatesToSkip = {};
 let skippedUpdateCounter = {};
-let requests = {}; 
+// let requests = {}; 
 
 const listen = (bluetoothConnectorParam, dataProvider, dataRequestIntervals, statusUpdateReceivedParam) => {
     if ( !dataProvider || isListening || !statusUpdateReceivedParam) {
@@ -17,7 +17,7 @@ const listen = (bluetoothConnectorParam, dataProvider, dataRequestIntervals, sta
 
     bluetoothConnector = bluetoothConnectorParam;
 
-    // DataLogger.init();
+    // DataLogger.init(); // TODO re-enable this later
 
     const serialOptions = {
         dataCallback: dataReceived,

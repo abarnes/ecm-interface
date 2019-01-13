@@ -1,13 +1,13 @@
 import { getLayoutConfig } from "../../utils/ConfigFileUtil";
 import { convertGaugeConfigToBuffer } from "../../utils/GaugeConfigBufferUtil";
-import bleno from 'bleno';
+import bleno from 'bleno-mac';
 import util from 'util';
 
 let BlenoCharacteristic = bleno.Characteristic;
 
 let LayoutConfigCharacteristic = function() {
     LayoutConfigCharacteristic.super_.call(this, {
-        uuid: 'f3floi62-f54e-20e8-b467-0ed5f8hs718b',
+        uuid: '94667c9c-6888-41a6-9401-3655ebbfaf63',
         properties: ['read', 'write'],
     });
 };

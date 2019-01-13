@@ -1,4 +1,4 @@
-import { PowerFCCommands } from '../../../serial/PowerFCCommands'
+import { PowerFCCommands } from '../connectors/powerfc/PowerFCCommands'
 
 let dataCallback = null;
 let data = {

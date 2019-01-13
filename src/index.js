@@ -3,7 +3,7 @@ import DataRequestIntervalsX64 from './config/DataRequestIntervalConfigX64'
 import DataRequestIntervalsARM from './config/DataRequestIntervalConfigARM'
 import BluetoothConnector from './bluetooth/BluetoothConnector'
 import RealDataConnector from './connectors/powerfc/SerialConnector'
-import MockDataConnector from './mock/MockDataConnector'
+import MockDataConnector from './dataRetrieval/MockDataConnector'
 import { startServer } from './websocket/websocketController'
 
 const shouldUseMockData = process.argv.includes("-mock") || process.argv.includes("mock");
