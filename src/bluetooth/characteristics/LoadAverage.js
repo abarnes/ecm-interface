@@ -1,4 +1,4 @@
-import bleno from 'bleno-mac';
+import bleno from '../BluetoothGateway';
 import os from 'os';
 import util from 'util';
 

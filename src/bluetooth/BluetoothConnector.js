@@ -1,4 +1,4 @@
-import bleno from 'bleno-mac';
+import bleno from './BluetoothGateway';
 import { SystemService } from './SystemService'
 import EngineDataCharacteristic from './characteristics/EngineData'
 

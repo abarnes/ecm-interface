@@ -1,4 +1,4 @@
-import bleno from 'bleno-mac';
+import bleno from '../BluetoothGateway';
 import util from 'util';
 import child_process from 'child_process';
 import DefaultThresholdConfig from '../../config/DefaultThresholdConfig';

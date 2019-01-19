@@ -1,12 +1,12 @@
 import { convertToBuffer } from '../../utils/EngineDataBufferConverter'
-import Bleno from 'bleno'
+import bleno from '../BluetoothGateway';
 import Util from 'util'
 
 export default (function(){
     // let lastDataPoint = null;
     let bluetoothCallback = null;
 
-    let BlenoCharacteristic = Bleno.Characteristic;
+    let BlenoCharacteristic = bleno.Characteristic;
 
     let EngineDataCharacteristic = function() {
         EngineDataCharacteristic.super_.call(this, {

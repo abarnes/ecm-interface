@@ -1,4 +1,4 @@
-import Bleno from 'bleno'
+import Bleno from './BluetoothGateway';
 import Util from 'util'
 
 import LoadAverageCharacteristic from './characteristics/LoadAverage'

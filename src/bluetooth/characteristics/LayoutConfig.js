@@ -1,6 +1,6 @@
 import { getLayoutConfig } from "../../utils/ConfigFileUtil";
 import { convertGaugeConfigToBuffer } from "../../utils/GaugeConfigBufferUtil";
-import bleno from 'bleno-mac';
+import bleno from '../BluetoothGateway';
 import util from 'util';
 
 let BlenoCharacteristic = bleno.Characteristic;

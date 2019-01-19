@@ -1,5 +1,5 @@
 import { getThresholdConfig } from "../../utils/ConfigFileUtil";
-import bleno from 'bleno-mac';
+import bleno from '../BluetoothGateway';
 import util from 'util';
 
 let BlenoCharacteristic = bleno.Characteristic;

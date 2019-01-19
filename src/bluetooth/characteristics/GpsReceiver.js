@@ -1,4 +1,4 @@
-import bleno from 'bleno-mac';
+import bleno from '../BluetoothGateway';
 import util from 'util';
 
 const characteristic = (function(){
