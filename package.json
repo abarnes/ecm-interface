@@ -24,7 +24,7 @@
     "ws": "^5.2.2"
   },
   "optionalDependencies": {
-    "bleno-mac": "github:abarnes/bleno-mac"
+    "bleno-mac": "github:notjosh/bleno-mac"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
