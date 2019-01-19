@@ -1,6 +1,7 @@
 import bleno from 'bleno-mac';
 import util from 'util';
 import child_process from 'child_process';
+import DefaultThresholdConfig from '../../config/DefaultThresholdConfig';
 
 let BlenoCharacteristic = bleno.Characteristic;
 
@@ -19,4 +20,4 @@ ShutdownCharacteristic.prototype.onWriteRequest = function shutdown(data) {
 
 util.inherits(ShutdownCharacteristic, BlenoCharacteristic);
 
-export default ShutdownCharacteristic;
+export default ShutdownCharacteristic;DefaultThresholdConfig
