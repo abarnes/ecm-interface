@@ -14,7 +14,7 @@ let ShutdownCharacteristic = function() {
 
 ShutdownCharacteristic.prototype.onWriteRequest = function shutdown(data) {
     console.log("Attempting shutdown");
-    child_process.exec('/sbin/shutdown -r now', function (msg) { 
+    child_process.exec('sudo /sbin/shutdown -h now', function (msg) { 
         console.log("Shutting down: ", msg);
     });
 }
