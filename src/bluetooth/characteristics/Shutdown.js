@@ -8,7 +8,7 @@ let BlenoCharacteristic = bleno.Characteristic;
 let ShutdownCharacteristic = function() {
     ShutdownCharacteristic.super_.call(this, {
         uuid: '382cccf9-9fdc-4ae0-8fc1-4570eabc3107',
-        properties: ['write']
+        properties: ['writeWithoutResponse']
     });
 };
 
