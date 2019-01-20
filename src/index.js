@@ -4,7 +4,7 @@ import DataRequestIntervalsARM from './config/DataRequestIntervalConfigARM'
 import BluetoothConnector from './bluetooth/BluetoothConnector'
 import RealDataConnector from './connectors/powerfc/SerialConnector'
 import MockDataConnector from './dataRetrieval/MockDataConnector'
-import { startServer } from './websocket/websocketController'
+import { startServer as startWebsocketServer } from './websocket/websocketController'
 
 const shouldUseMockData = process.argv.includes("-mock") || process.argv.includes("mock");
 
@@ -18,7 +18,7 @@ function startDataRequests() {
 
 // start websockets
 function startWebsockets() {
-    startServer()
+    startWebsocketServer()
 }
 
 startDataRequests();
