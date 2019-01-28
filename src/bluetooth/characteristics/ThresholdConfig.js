@@ -11,12 +11,13 @@ let ThresholdConfigCharacteristic = function() {
     });
 };
 
-ThresholdConfigCharacteristic.updateThresholds = function logData(time, data) {
-
+ThresholdConfigCharacteristic.updateThresholds = function updateThresholds(data) {
+    console.log("Bluetooth: ThresholdtConfigCharacteristic updateThresholds");
 }
 
 
 ThresholdConfigCharacteristic.prototype.onReadRequest = function(offset, callback) {
+    console.log("Bluetooth: ThresholdtConfigCharacteristic read");
     callback(BlenoCharacteristic.RESULT_SUCCESS, Buffer.from(JSON.stringify(getThresholdConfig())));
 };
 

@@ -13,10 +13,13 @@ let GaugeLayoutConfigCharacteristic = function() {
 };
 
 GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data) {
+    console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
+    
     console.log("should update with data", data);
 }
 
 GaugeLayoutConfigCharacteristic.prototype.onReadRequest = function(offset, callback) {
+    console.log("Bluetooth: GaugeLayoutConfigCharacteristic read");
     callback(BlenoCharacteristic.RESULT_SUCCESS, convertGaugeConfigToBuffer(getLayoutConfig()));
 };
 
