@@ -26,7 +26,7 @@ const convertGaugeConfigToBuffer = (config) => {
     buffer.writeUIntLE(SEPARATOR_VALUE, bufferIndex, SEPARATOR_BYTE_LENGTH);
     bufferIndex += 3;
 
-    for (let key of Object.keys(config.monitors)) {
+    for (let key of config.monitors) {
         buffer.writeInt8(engineDataItems[key].index, bufferIndex++);
     }
 
@@ -71,7 +71,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
         } else {
             const name = getEngineDataName(index);
             if (name) {
-                layoutConfig.monitors[item] = item
+                layoutConfig.monitors.push(item);
             }
             index++;
         }
