@@ -2,6 +2,7 @@ import bluetoothDataBuffers from '../models/BluetoothDataBuffers'
 import { engineDataItems, itemFromIndex as getEngineDataName } from '../models/EngineDataItem'
 
 const SEPARATOR_VALUE = (256 * 256 * 256) - 1;
+const SEPARATOR_BYTE_LENGTH = 3;
 
 const convertGaugeConfigToBuffer = (config) => {
     if (typeof config !== "object" || !config.gauges || !config.monitors) {
@@ -22,7 +23,7 @@ const convertGaugeConfigToBuffer = (config) => {
     }
 
     // separate the gauges and monitors
-    buffer.writeUInt(SEPARATOR_VALUE, bufferIndex);
+    buffer.writeUIntLE(SEPARATOR_VALUE, bufferIndex, SEPARATOR_BYTE_LENGTH);
     bufferIndex += 3;
 
     for (let key of Object.keys(config.monitors)) {
