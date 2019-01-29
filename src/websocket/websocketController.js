@@ -21,7 +21,7 @@ export const startServer = () => {
                 return;
             }
 
-            // TODO handle this stuff
+            // TODO handle any incoming messages
         });
 
         ws.on("close", function close() {
@@ -35,11 +35,19 @@ export const startServer = () => {
 }
 
 const stateChangeCallback = function stateChangeCallback(state) {
+    runFunctionOnEachConnectedSocket(() => socket.send(wsData("data_update", state)));
+}
+
+export const publishGaugeLayoutChange = function publishGaugeLayoutChange(layout) {
+    runFunctionOnEachConnectedSocket(() => socket.send(wsData("gauge_layout_update", layout)));
+}
+
+const runFunctionOnEachConnectedSocket = function runFunctionOnEachConnectedSocket(callback) {
     sockets.forEach(socket => {
         if (socket.readyState === 1) {
-            socket.send(wsData("data_update", state));
+            callback();
         }
     });
-}
+}   
 
 store.subscribeToStateChange(stateChangeCallback);

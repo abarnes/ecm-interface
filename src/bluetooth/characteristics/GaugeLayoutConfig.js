@@ -1,5 +1,6 @@
 import { getLayoutConfig, setLayoutConfig } from "../../utils/ConfigFileUtil";
 import { convertGaugeConfigToBuffer, convertGaugeConfigBufferToObject } from "../../utils/GaugeConfigBufferUtil";
+import { publishGaugeLayoutChange } from "../../websocket/websocketController";
 import bleno from '../BluetoothGateway';
 import util from 'util';
 
@@ -18,6 +19,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout
     const newLayoutConfig = convertGaugeConfigBufferToObject(data);
     if (newLayoutConfig) {
         setLayoutConfig(newLayoutConfig);
+        publishGaugeLayoutChange(newLayoutConfig);
     }
 
     if (!withoutResponse && typeof callback === "function") {
