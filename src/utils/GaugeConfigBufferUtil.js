@@ -34,7 +34,7 @@ const convertGaugeConfigToBuffer = (config) => {
 }
 
 const convertGaugeConfigBufferToObject = (buffer) => {
-    if (!buffer) {
+    if (!buffer || buffer.length < 3) {
         return null;
     }
 

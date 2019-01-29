@@ -30,6 +30,14 @@ export const getLayoutConfig = () => {
     return cachedLayout;
 }
 
+export const setLayoutConfig = (config) => {
+    if (!config) {
+        return;
+    }
+
+    // write to the file
+}
+
 const findConfigFileByName = (name) => {
     const foundDirectory = findConfigDirectory();
     if (foundDirectory) {

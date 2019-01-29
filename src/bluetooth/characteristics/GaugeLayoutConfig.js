@@ -1,5 +1,5 @@
-import { getLayoutConfig } from "../../utils/ConfigFileUtil";
-import { convertGaugeConfigToBuffer } from "../../utils/GaugeConfigBufferUtil";
+import { getLayoutConfig, setLayoutConfig } from "../../utils/ConfigFileUtil";
+import { convertGaugeConfigToBuffer, convertGaugeConfigBufferToObject } from "../../utils/GaugeConfigBufferUtil";
 import bleno from '../BluetoothGateway';
 import util from 'util';
 
@@ -12,10 +12,17 @@ let GaugeLayoutConfigCharacteristic = function() {
     });
 };
 
-GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data) {
+GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data, offset, withoutResponse, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
-    
-    console.log("should update with data", data);
+
+    const newLayoutConfig = convertGaugeConfigBufferToObject(data);
+    if (newLayoutConfig) {
+        setLayoutConfig(newLayoutConfig);
+    }
+
+    if (!withoutResponse && typeof callback === "function") {
+        callback(newLayoutConfig !== null);
+    }
 }
 
 GaugeLayoutConfigCharacteristic.prototype.onReadRequest = function(offset, callback) {
