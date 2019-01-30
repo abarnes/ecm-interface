@@ -26,6 +26,15 @@ export const getThresholdConfig = () => {
     return cachedThresholds;
 }
 
+export const setThresholdConfig = (config) => {
+    if (!config) {
+        return;
+    }
+
+    cachedThresholds = config;
+    writeConfigFile(THRESHOLD_CONFIG_FILE_NAME, config);
+}
+
 export const getLayoutConfig = () => {
     if (cachedLayout) {
         return cachedLayout;
@@ -44,11 +53,7 @@ export const setLayoutConfig = (config) => {
     }
 
     cachedLayout = config;
-    
-    const foundDirectory = findConfigDirectoryWithFile(LAYOUT_CONFIG_FILE_NAME);
-    if (foundDirectory) {
-        fs.writeFileSync(filePathFromName(foundDirectory, name), JSON.stringify(config));
-    }
+    writeConfigFile(LAYOUT_CONFIG_FILE_NAME, config);
 }
 
 
@@ -56,6 +61,13 @@ export const setLayoutConfig = (config) => {
 
 const filePathFromName = (directory, name) => {
     return directory + "/" + name;
+}
+
+const writeConfigFile = (filename, config) => {
+    const foundDirectory = findConfigDirectoryWithFile(filename);
+    if (foundDirectory) {
+        fs.writeFileSync(filePathFromName(foundDirectory, filename), JSON.stringify(config));
+    }
 }
 
 const findConfigFileByName = (name) => {

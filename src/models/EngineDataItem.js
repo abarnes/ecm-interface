@@ -142,8 +142,15 @@ const engineDataItems = {
 }
 
 const itemFromIndex = (index) => {
-    const result = engineDataItems.filter(item => item.index === index);
-    return (result.length === 1) ? result[0] : null;
+    for (var key in engineDataItems) {
+        if (engineDataItems.hasOwnProperty(key)) {
+            if (engineDataItems[key].index === index) {
+                return key;
+            }
+        }
+    }
+
+    return null;
 }
 
 export { engineDataItems, itemFromIndex }
