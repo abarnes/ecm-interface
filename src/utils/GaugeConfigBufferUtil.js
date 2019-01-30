@@ -52,7 +52,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
     let isInMonitorSection = false;
     let separatorCounter = 0;
     while (byteIndex < buffer.byteLength) {
-        const value = buffer.readIntLE(index, 1);
+        const value = buffer.readIntLE(byteIndex, 1);
 
         if (!isInMonitorSection) {
             separatorCounter = (value === SEPARATOR_VALUE) ? (separatorCounter + 1) : 0;
@@ -63,12 +63,12 @@ const convertGaugeConfigBufferToObject = (buffer) => {
         }
 
         if (value !== SEPARATOR_VALUE) {
-            const name = getEngineDataName(index);
+            const name = getEngineDataName(byteIndex);
             if (name) {
                 if (!isInMonitorSection) {
                     layoutConfig.gauges[name] = {
-                        showGraph: (buffer.readIntLE(index + 1, 1) === 1),
-                        graphTime: buffer.readIntLE(index + 2, 1)
+                        showGraph: (buffer.readIntLE(byteIndex + 1, 1) === 1),
+                        graphTime: buffer.readIntLE(byteIndex + 2, 1)
                     }
                     byteIndex += 2;
                 } else {
