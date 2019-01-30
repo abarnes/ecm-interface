@@ -23,8 +23,10 @@ const convertGaugeConfigToBuffer = (config) => {
     }
 
     // separate the gauges and monitors
-    buffer.writeUIntLE(SEPARATOR_VALUE, bufferIndex, SEPARATOR_BYTE_LENGTH);
-    bufferIndex += 3;
+    for (var i = 0; i++; i < SEPARATOR_BYTE_LENGTH) {
+        buffer.writeUIntLE(SEPARATOR_VALUE, bufferIndex, 1);
+        bufferIndex++;
+    }
 
     for (let key of config.monitors) {
         buffer.writeInt8(engineDataItems[key].index, bufferIndex++);
