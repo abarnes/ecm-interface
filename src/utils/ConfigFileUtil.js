@@ -15,6 +15,10 @@ let cachedThresholds = null;
 let cachedLayout = null;
 
 export const getThresholdConfig = () => {
+    if (cachedThresholds) {
+        return cachedThresholds;
+    }
+
     cachedThresholds = findConfigFileByName(THRESHOLD_CONFIG_FILE_NAME);
     if (!cachedThresholds) {
         cachedThresholds = defaultThresholdConfig;
@@ -23,8 +27,12 @@ export const getThresholdConfig = () => {
 }
 
 export const getLayoutConfig = () => {
+    if (cachedLayout) {
+        return cachedLayout;
+    }
+
     cachedLayout = findConfigFileByName(LAYOUT_CONFIG_FILE_NAME);
-    if (!cachedLayout) {
+    if (!cachedLayout || typeof cachedLayout !== "object" || !cachedLayout.monitors || !cachedLayout.gauges) {
         cachedLayout = defaultLayoutConfig;
     }
     return cachedLayout;
@@ -35,25 +43,45 @@ export const setLayoutConfig = (config) => {
         return;
     }
 
-    // write to the file
+    cachedLayout = config;
+    
+    const foundDirectory = findConfigDirectoryWithFile(LAYOUT_CONFIG_FILE_NAME);
+    if (foundDirectory) {
+        fs.writeFileSync(filePathFromName(foundDirectory, name), JSON.stringify(config));
+    }
+}
+
+
+// private
+
+const filePathFromName = (directory, name) => {
+    return directory + "/" + name;
 }
 
 const findConfigFileByName = (name) => {
-    const foundDirectory = findConfigDirectory();
+    const foundDirectory = findConfigDirectoryWithFile(name);
     if (foundDirectory) {
-        if (Finder.in(foundDirectory).findFile(name)) {
-            let contents = fs.readFileSync(foundDirectory + "/" + name);
-            try {
-                let jsonContents = JSON.parse(contents);
-                console.log("Using USB-defined config " + name);
-                return jsonContents;
-            } catch (e) {
-                console.log("Error parsing json: ", e);
-            }
+        const contents = fs.readFileSync(filePathFromName(foundDirectory, name));
+        try {
+            let jsonContents = JSON.parse(contents);
+            console.log("Using USB-defined config " + name);
+            return jsonContents;
+        } catch (e) {
+            console.log("Error parsing json: ", e);
         }
     }
 
     return null;
+}
+
+const findConfigDirectoryWithFile = (name) => {
+    const foundDirectory = findConfigDirectory();
+    if (foundDirectory) {
+        if (Finder.in(foundDirectory).findFile(name)) {
+            return foundDirectory;
+        }
+    }
+    return false;
 }
 
 const findConfigDirectory = () => {
