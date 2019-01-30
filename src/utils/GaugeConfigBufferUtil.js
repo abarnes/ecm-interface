@@ -1,7 +1,7 @@
 import bluetoothDataBuffers from '../models/BluetoothDataBuffers'
 import { engineDataItems, itemFromIndex as getEngineDataName } from '../models/EngineDataItem'
 
-const SEPARATOR_VALUE = (256 * 256 * 256) - 1;
+const SEPARATOR_VALUE = 255;
 const SEPARATOR_BYTE_LENGTH = 3;
 
 const convertGaugeConfigToBuffer = (config) => {
@@ -48,33 +48,36 @@ const convertGaugeConfigBufferToObject = (buffer) => {
         monitors: {}
     };
 
-    let isInGaugeSection = true;
-    let index = 2;
-    while (index < buffer.byteLength) {
-        if (buffer.readIntLE(index, 3) === SEPARATOR_VALUE) {
-            isInGaugeSection = false;
-            index += 3;
+    let byteIndex = 2;
+    let isInMonitorSection = false;
+    let separatorCounter = 0;
+    while (byteIndex < buffer.byteLength) {
+        const value = buffer.readIntLE(index, 1);
+
+        if (!isInMonitorSection) {
+            separatorCounter = (value === SEPARATOR_VALUE) ? (separatorCounter + 1) : 0;
+
+            if (separatorCounter === SEPARATOR_BYTE_LENGTH) {
+                isInMonitorSection = true;
+            }
         }
 
-        let item = buffer.readIntLE(index, 1);
-
-        // need to convert item index to item
-        if (isInGaugeSection) {
+        if (value !== SEPARATOR_VALUE) {
             const name = getEngineDataName(index);
             if (name) {
-                layoutConfig.gauges[item] = {
-                    showGraph: buffer.readIntLE(index + 1, 1),
-                    graphTime: buffer.readIntLE(index + 2, 1)
+                if (!isInMonitorSection) {
+                    layoutConfig.gauges[name] = {
+                        showGraph: (buffer.readIntLE(index + 1, 1) === 1),
+                        graphTime: buffer.readIntLE(index + 2, 1)
+                    }
+                    byteIndex += 2;
+                } else {
+                    layoutConfig.monitors.push(name);
                 }
             }
-            index +=3;
-        } else {
-            const name = getEngineDataName(index);
-            if (name) {
-                layoutConfig.monitors.push(item);
-            }
-            index++;
         }
+
+        byteIndex++;
     }
 
     return layoutConfig;
