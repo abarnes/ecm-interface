@@ -17,25 +17,27 @@ const convertGaugeConfigToBuffer = (config) => {
     
     let bufferIndex = 2
     for (let key of Object.keys(config.gauges)) {
-        buffer.writeInt8(engineDataItems[key].index, bufferIndex++);
-        buffer.writeInt8(config.gauges[key].showGraph ? 1 : 0, bufferIndex++);
-        buffer.writeInt8(config.gauges[key].graphTime, bufferIndex++);
+        buffer.writeUInt8(engineDataItems[key].index, bufferIndex++);
+        buffer.writeUInt8(config.gauges[key].showGraph ? 1 : 0, bufferIndex++);
+        buffer.writeUInt8(config.gauges[key].graphTime, bufferIndex++);
     }
 
     // separate the gauges and monitors
     for (var i = 0; i++; i < SEPARATOR_BYTE_LENGTH) {
-        buffer.writeUIntLE(SEPARATOR_VALUE, bufferIndex, 1);
+        buffer.writeUInt8(SEPARATOR_VALUE, bufferIndex);
         bufferIndex++;
     }
 
     for (let key of config.monitors) {
-        buffer.writeInt8(engineDataItems[key].index, bufferIndex++);
+        buffer.writeUInt8(engineDataItems[key].index, bufferIndex++);
     }
 
+    console.log("Wrote buffer: ", buffer);
     return buffer;
 }
 
 const convertGaugeConfigBufferToObject = (buffer) => {
+    console.log("Reading buffer: ", buffer);
     if (!buffer || buffer.length < 3) {
         return null;
     }
@@ -54,7 +56,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
     let isInMonitorSection = false;
     let separatorCounter = 0;
     while (byteIndex < buffer.length) {
-        const value = buffer.readIntLE(byteIndex, 1);
+        const value = buffer.readUInt8(byteIndex);
 
         if (!isInMonitorSection) {
             separatorCounter = (value === SEPARATOR_VALUE) ? (separatorCounter + 1) : 0;
@@ -69,8 +71,8 @@ const convertGaugeConfigBufferToObject = (buffer) => {
             if (name) {
                 if (!isInMonitorSection) {
                     layoutConfig.gauges[name] = {
-                        showGraph: (buffer.readIntLE(byteIndex + 1, 1) === 1),
-                        graphTime: buffer.readIntLE(byteIndex + 2, 1)
+                        showGraph: (buffer.readUInt8(byteIndex + 1) === 1),
+                        graphTime: buffer.readUInt8(byteIndex + 2)
                     }
                     byteIndex += 2;
                 } else {
