@@ -49,7 +49,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
 
     let layoutConfig = {
         gauges: {},
-        monitors: {}
+        monitors: []
     };
 
     let byteIndex = 2;
