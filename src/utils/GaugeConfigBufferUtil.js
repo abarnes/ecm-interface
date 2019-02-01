@@ -32,12 +32,10 @@ const convertGaugeConfigToBuffer = (config) => {
         buffer.writeUInt8(engineDataItems[key].index, bufferIndex++);
     }
 
-    console.log("Wrote buffer: ", buffer);
     return buffer;
 }
 
 const convertGaugeConfigBufferToObject = (buffer) => {
-    console.log("Reading buffer: ", buffer);
     if (!buffer || buffer.length < 3) {
         return null;
     }

@@ -17,15 +17,12 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
 
     const newLayoutConfig = convertGaugeConfigBufferToObject(data);
-    console.log(callback);
-    console.log("new layout is", newLayoutConfig);
     if (newLayoutConfig) {
         setLayoutConfig(newLayoutConfig);
         publishGaugeLayoutChange(newLayoutConfig);
     }
 
     if (!withoutResponse && typeof callback === "function") {
-        console.log("callback!!");
         callback(newLayoutConfig !== null);
     }
 }
