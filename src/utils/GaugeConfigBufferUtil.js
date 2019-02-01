@@ -53,7 +53,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
     let byteIndex = 2;
     let isInMonitorSection = false;
     let separatorCounter = 0;
-    while (byteIndex < buffer.byteLength) {
+    while (byteIndex < buffer.length) {
         const value = buffer.readIntLE(byteIndex, 1);
 
         if (!isInMonitorSection) {
