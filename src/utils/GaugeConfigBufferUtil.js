@@ -67,7 +67,7 @@ const convertGaugeConfigBufferToObject = (buffer) => {
         }
 
         if (value !== SEPARATOR_VALUE) {
-            const name = getEngineDataName(byteIndex);
+            const name = getEngineDataName(value);
             if (name) {
                 if (!isInMonitorSection) {
                     layoutConfig.gauges[name] = {

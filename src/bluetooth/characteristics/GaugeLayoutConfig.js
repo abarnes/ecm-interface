@@ -25,6 +25,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout
     }
 
     if (!withoutResponse && typeof callback === "function") {
+        console.log("callback!!");
         callback(newLayoutConfig !== null);
     }
 }

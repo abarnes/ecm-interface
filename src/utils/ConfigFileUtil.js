@@ -54,7 +54,6 @@ export const setLayoutConfig = (config) => {
 
     cachedLayout = config;
     writeConfigFile(LAYOUT_CONFIG_FILE_NAME, config);
-    console.log("wrote it");
 }
 
 
