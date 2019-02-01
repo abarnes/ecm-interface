@@ -23,7 +23,7 @@ const convertGaugeConfigToBuffer = (config) => {
     }
 
     // separate the gauges and monitors
-    for (var i = 0; i++; i < SEPARATOR_BYTE_LENGTH) {
+    for (var i = 0; i < SEPARATOR_BYTE_LENGTH; i++) {
         buffer.writeUInt8(SEPARATOR_VALUE, bufferIndex);
         bufferIndex++;
     }
