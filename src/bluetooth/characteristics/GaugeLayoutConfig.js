@@ -15,6 +15,10 @@ let GaugeLayoutConfigCharacteristic = function() {
 
 GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data, offset, withoutResponse, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
+    console.log(data);
+    console.log(pffset);
+    console.log(withoutResponse);
+    console.log(callback);
 
     const newLayoutConfig = convertGaugeConfigBufferToObject(data);
     if (newLayoutConfig) {
@@ -24,6 +28,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout
 
     if (!withoutResponse && typeof callback === "function") {
         callback(BlenoCharacteristic.RESULT_SUCCESS);
+        console.log(typeof callback);
     }
 }
 
