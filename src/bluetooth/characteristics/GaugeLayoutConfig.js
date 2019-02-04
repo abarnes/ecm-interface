@@ -23,7 +23,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout
     }
 
     if (!withoutResponse && typeof callback === "function") {
-        callback(newLayoutConfig !== null);
+        callback(BlenoCharacteristic.RESULT_SUCCESS, newLayoutConfig !== null);
     }
 }
 
