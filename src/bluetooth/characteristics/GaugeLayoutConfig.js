@@ -9,7 +9,7 @@ let BlenoCharacteristic = bleno.Characteristic;
 let GaugeLayoutConfigCharacteristic = function() {
     GaugeLayoutConfigCharacteristic.super_.call(this, {
         uuid: '94667c9c-6888-41a6-9401-3655ebbfaf63',
-        properties: ['read', 'write'],
+        properties: ['read', 'write', 'writeWithoutResponse'],
     });
 };
 
