@@ -13,7 +13,7 @@ let GaugeLayoutConfigCharacteristic = function() {
     });
 };
 
-GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data, offset, withoutResponse, callback) {
+GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteRequest(data, offset, withoutResponse, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
     console.log(data);
     console.log(offset);
