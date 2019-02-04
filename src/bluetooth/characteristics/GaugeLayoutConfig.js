@@ -27,7 +27,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
     }
 
     if (!withoutResponse && typeof callback === "function") {
-        callback(BlenoCharacteristic.RESULT_SUCCESS);
+        callback.call(this, BlenoCharacteristic.RESULT_SUCCESS);
         console.log(typeof callback);
     }
 }
