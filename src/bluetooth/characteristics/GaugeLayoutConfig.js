@@ -16,7 +16,7 @@ let GaugeLayoutConfigCharacteristic = function() {
 GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function updateLayout(data, offset, withoutResponse, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
     console.log(data);
-    console.log(pffset);
+    console.log(offset);
     console.log(withoutResponse);
     console.log(callback);
 
