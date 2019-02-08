@@ -6,17 +6,17 @@ import util from 'util';
 
 let BlenoCharacteristic = bleno.Characteristic;
 
+let bluetoothCallback = null;
+
 let GaugeLayoutConfigCharacteristic = function() {
     GaugeLayoutConfigCharacteristic.super_.call(this, {
         uuid: '94667c9c-6888-41a6-9401-3655ebbfaf63',
-        properties: ['write', 'read']
+        properties: ['write', 'read', 'notify']
     });
 };
 
 GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteRequest(data, offset, withoutResponse, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic write");
-    console.log(BlenoCharacteristic.RESULT_SUCCESS);
-    console.log(0x00);
 
     const newLayoutConfig = convertGaugeConfigBufferToObject(data);
     if (newLayoutConfig) {
@@ -24,10 +24,14 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
         publishGaugeLayoutChange(newLayoutConfig);
     }
 
-    if (!withoutResponse && typeof callback === "function") {
-        console.log("callback!");
-        callback(BlenoCharacteristic.RESULT_SUCCESS);
+    if (!withoutResponse && typeof bluetoothCallback === "function") {
+        bluetoothCallback(BlenoCharacteristic.RESULT_SUCCESS);
+        // callback(BlenoCharacteristic.RESULT_SUCCESS);
     }
+}
+
+GaugeLayoutConfigCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
+    bluetoothCallback = updateValueCallback; 
 }
 
 GaugeLayoutConfigCharacteristic.prototype.onReadRequest = function(offset, callback) {
