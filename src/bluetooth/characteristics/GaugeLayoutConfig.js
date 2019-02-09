@@ -25,7 +25,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
     }
 
     if (!withoutResponse && typeof bluetoothCallback === "function") {
-        bluetoothCallback(BlenoCharacteristic.RESULT_SUCCESS);
+        bluetoothCallback(BlenoCharacteristic.RESULT_SUCCESS, Buffer.from([0x01]));
         // callback(BlenoCharacteristic.RESULT_SUCCESS);
     }
 }
