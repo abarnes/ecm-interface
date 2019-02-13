@@ -26,6 +26,7 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
 
     // Hack - use the notify callback here so that the value actually gets updated
     if (!withoutResponse && typeof bluetoothCallback === "function") {
+        callback(BlenoCharacteristic.RESULT_SUCCESS);
         bluetoothCallback(data);
     }
 }
