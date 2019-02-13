@@ -24,10 +24,9 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
         publishGaugeLayoutChange(newLayoutConfig);
     }
 
+    // Hack - use the notify callback here so that the value actually gets updated
     if (!withoutResponse && typeof bluetoothCallback === "function") {
-        console.log("callback!");
         bluetoothCallback(data);
-        // callback(BlenoCharacteristic.RESULT_SUCCESS);
     }
 }
 
