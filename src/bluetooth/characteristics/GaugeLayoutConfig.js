@@ -11,7 +11,7 @@ let bluetoothCallback = null;
 let GaugeLayoutConfigCharacteristic = function() {
     GaugeLayoutConfigCharacteristic.super_.call(this, {
         uuid: '94667c9c-6888-41a6-9401-3655ebbfaf63',
-        properties: ['write', 'read']
+        properties: ['write', 'read', 'notify']
     });
 };
 
@@ -26,14 +26,12 @@ GaugeLayoutConfigCharacteristic.prototype.onWriteRequest = function onWriteReque
 
     if (!withoutResponse && typeof bluetoothCallback === "function") {
         callback(BlenoCharacteristic.RESULT_SUCCESS);
-        // bluetoothCallback(data);
     }
 }
 
-/*
 GaugeLayoutConfigCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
     bluetoothCallback = updateValueCallback; 
-}*/
+}
 
 GaugeLayoutConfigCharacteristic.prototype.onReadRequest = function(offset, callback) {
     console.log("Bluetooth: GaugeLayoutConfigCharacteristic read");
