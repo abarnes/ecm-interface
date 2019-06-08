@@ -6,153 +6,94 @@ const gauges = {
             name: "RPM",
             stateKey: "rpm",
             showGraph: true,
-            graphTime: 15,
-            transform: (value) => {
-                return Math.round(value);
-            },
-            displaySuffix: null,
-            thresholds: {
-                warning: 7500,
-                critical: 8000
-            }
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 0),
+            displaySuffix: null
         },
         boost: {
             name: "Boost",
             stateKey: "boost",
             showGraph: true,
-            graphTime: 15,
-            transform: (value) => {
-                return Math.round(mmHGToPsi(value));
-            },
-            displaySuffix: (value) => {
-                return value > 0 ? (value + "PSI") : (value + "inHG");
-            },
-            thresholds: {
-                warning: 520, // 10psi
-                critical: 672 // 13psi
-            }
+            graphTime: 10,
+            transform: util.pressureTransform,
+            displaySuffix: util.pressureSuffix
         },
         waterTemp: {
             name: "Water Temp",
             stateKey: "waterTemp",
             showGraph: true,
-            graphTime: 30,
-            transform: (value) => {
-                return Math.round(celciusToFahrenheit(value));
-            },
-            displaySuffix: (value) => {
-                return value + "&deg;"
-            },
-            thresholds: {
-                warning: 97,
-                critical: 108
-            }
+            graphTime: 10,
+            transform: util.tempTransform,
+            displaySuffix: util.degreeSuffix
         },
         knock: {
             name: "Knock",
             stateKey: "knock",
             showGraph: true,
-            graphTime: 15,
-            transform: (value) => {
-                return Math.round(value);
-            },
-            displaySuffix: null,
-            thresholds: {
-                warning: 32,
-                critical: 40
-            }
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 0),
+            displaySuffix: null
         },
         injectorDuty: {
             name: "Injector Duty",
             stateKey: "injectorDuty",
             showGraph: true,
-            graphTime: 15,
-            transform: (value) => {
-                return Math.round(value, 1);
-            },
-            displaySuffix: (value) => {
-                return value + "%"
-            },
-            thresholds: {
-                warning: 80,
-                critical: 95
-            }
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 1),
+            displaySuffix: util.percentSuffix
         },
-
-        // monitors
-
         speed: {
             name: "Speed",
             stateKey: "speed",
-            showGraph: false,
-            graphTime: 0,
+            showGraph: true,
+            graphTime: 10,
             transform: (value) => {
                 return Math.round(kphToMph(value));
             },
             displaySuffix: (value) => {
                 return value + " MPH"
-            },
-            thresholds: null
+            }
         },
         leadingIgnition: {
             name: "Leading Ignition",
             stateKey: "leadingIgnition",
-            showGraph: false,
-            graphTime: 0,
-            transform: (value) => {
-                return Math.round(value, 1);
-            },
-            displaySuffix: (value) => {
-                return value + "&deg;"
-            },
-            thresholds: null
+            showGraph: true,
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 1),
+            displaySuffix: util.degreeSuffix
         },
         trailingIgnition: {
             name: "Trailing Ignition",
             stateKey: "trailingIgnition",
-            showGraph: false,
-            graphTime: 0,
-            transform: (value) => {
-                return Math.round(value, 1);
-            },
-            displaySuffix: (value) => {
-                return value + "&deg;"
-            },
-            thresholds: null
+            showGraph: true,
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 1),
+            displaySuffix: util.degreeSuffix
         },
         airTemp: {
             name: "Air Temp",
             stateKey: "airTemp",
-            showGraph: false,
-            graphTime: 0,
-            transform: (value) => {
-                return Math.round(celciusToFahrenheit(value));
-            },
-            displaySuffix: (value) => {
-                return value + "&deg;"
-            },
-            thresholds: null
+            showGraph: true,
+            graphTime: 10,
+            transform: util.tempTransform,
+            displaySuffix: util.degreeSuffix
         },
         batteryVoltage: {
-            name: "Battery Voltage",
+            name: "Battery",
             stateKey: "batteryVoltage",
-            showGraph: false,
-            graphTime: 0,
-            transform: (value) => {
-                return Math.round(value, 1);
-            },
-            displaySuffix: (value) => {
-                return value + "V"
-            },
-            thresholds: null
+            showGraph: true,
+            graphTime: 10,
+            transform: util.roundingTransform.bind(this, 1),
+            displaySuffix: util.voltageSuffix
         },
+
 
         // advanced
         intakePressure: {
             name: "IntakePressure",
             stateKey: "intakePressure",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.pressureTransform,
             displaySuffix: util.pressureSuffix
         },            
@@ -160,7 +101,7 @@ const gauges = {
             name: "Map Sensor Voltage",
             stateKey: "mapSensorVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
@@ -168,15 +109,15 @@ const gauges = {
             name: "TPS Sensor Voltage",
             stateKey: "tpsVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         }, 
         primaryInjectorPulse: {
-            name: "Primary Injector Pulse",
+            name: "Primary Inj. Pulse",
             stateKey: "primaryInjectorPulse",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         }, 
@@ -184,7 +125,7 @@ const gauges = {
             name: "Fuel Correction",
             stateKey: "fuelCorrection",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         },
@@ -192,7 +133,7 @@ const gauges = {
             name: "Fuel Temp",
             stateKey: "fuelTemp",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.tempTransform,
             displaySuffix: util.degreeSuffix
         },
@@ -200,7 +141,7 @@ const gauges = {
             name: "MOP Position",
             stateKey: "mopPosition",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         },
@@ -208,7 +149,7 @@ const gauges = {
             name: "Boost TP",
             stateKey: "boostTP",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         }, 
@@ -216,7 +157,7 @@ const gauges = {
             name: "Boost WG",
             stateKey: "boostWG",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         },
@@ -224,7 +165,7 @@ const gauges = {
             name: "Intake Temp",
             stateKey: "intakeTemp",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.tempTransform,
             displaySuffix: util.degreeSuffix
         },
@@ -232,7 +173,7 @@ const gauges = {
             name: "Idle Speed Control Valve Duty",
             stateKey: "icsvDuty",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 0),
             displaySuffix: util.percentSuffix
         },
@@ -245,10 +186,10 @@ const gauges = {
             displaySuffix: util.voltageSuffix
         },
         secondaryInjectorPulse: {
-            name: "Secondary Injector Pulse",
+            name: "Secondary Inj. Pulse",
             stateKey: "secondaryInjectorPulse",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: null,
             displaySuffix: null
         },
@@ -258,7 +199,7 @@ const gauges = {
             name: "TPS Full Range Voltage",
             stateKey: "tpsFullRangeVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
@@ -266,7 +207,7 @@ const gauges = {
             name: "TPS Narrow Range Voltage",
             stateKey: "tpsNarrowRangeVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
@@ -274,15 +215,15 @@ const gauges = {
             name: "MOP Position Sensor Voltage",
             stateKey: "mopPositionSensorVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
         waterTempSensorVoltage: {
-            name: "Water Temp Sensor Voltage",
+            name: "Water Temp Sensor",
             stateKey: "waterTempSensorVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
@@ -298,7 +239,7 @@ const gauges = {
             name: "Fuel Temp Sensor Voltage",
             stateKey: "fuelTempSensorVoltage",
             showGraph: true,
-            graphTime: 60,
+            graphTime: 10,
             transform: util.roundingTransform.bind(this, 1),
             displaySuffix: util.voltageSuffix
         },
@@ -360,7 +301,7 @@ const gauges = {
             displaySuffix: null
         },
         electricalLoadSwitch: {
-            name: "Electrical Load Switch",
+            name: "Elect. Load Switch",
             stateKey: "electricalLoadSwitch",
             showGraph: false,
             graphTime: 0,

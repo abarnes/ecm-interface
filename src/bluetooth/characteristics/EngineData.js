@@ -30,11 +30,6 @@ export default (function(){
         bluetoothCallback = updateValueCallback;
     }
 
-    
-    EngineDataCharacteristic.prototype.onReadRequest = function(offset, callback) {
-        return this._value;
-    };
-
 
     Util.inherits(EngineDataCharacteristic, BlenoCharacteristic);
 
