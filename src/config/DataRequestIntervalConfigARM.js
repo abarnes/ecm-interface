@@ -4,7 +4,7 @@ const intervals = [
     {
         command: PowerFCCommands.basic,
         requestInterval: 250,
-        stateUpdateSkips: 2,
+        stateUpdateSkips: 0,
         startOffset: 0
     }
 ];
