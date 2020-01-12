@@ -3,7 +3,7 @@ import { PowerFCCommands } from '../connectors/powerfc/PowerFCCommands'
 const intervals = [
     {
         command: PowerFCCommands.basic,
-        requestInterval: 10,
+        requestInterval: 1000,
         stateUpdateSkips: 0,
         startOffset: 0
     },

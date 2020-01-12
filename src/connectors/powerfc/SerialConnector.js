@@ -1,6 +1,4 @@
-//import SerialPort from 'node-loader!./serialport.node';
 import SerialPort from 'serialport'
-import Buffer from 'buffer'
 import ConvertHex from 'convert-hex'
 import { PowerFCCommands } from './PowerFCCommands'
 import PowerFCResponseParser from './PowerFCResponseParser'
