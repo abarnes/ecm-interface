@@ -1,4 +1,4 @@
-// import DataLogger from '../logger/DataLogger'
+import DataLogger from '../logger/DataLogger'
 import store from '../store/EngineData';
 
 let isListening = false;
@@ -8,7 +8,6 @@ let hasReceivedValidData = false;
 
 let updatesToSkip = {};
 let skippedUpdateCounter = {};
-// let requests = {}; 
 
 const listen = (bluetoothConnectorParam, dataProvider, dataRequestIntervals, statusUpdateReceivedParam) => {
     if ( !dataProvider || isListening || !statusUpdateReceivedParam) {
@@ -17,7 +16,7 @@ const listen = (bluetoothConnectorParam, dataProvider, dataRequestIntervals, sta
 
     bluetoothConnector = bluetoothConnectorParam;
 
-    // DataLogger.init(); // TODO re-enable this later
+    DataLogger.init(); // TODO re-enable this later
 
     const serialOptions = {
         dataCallback: dataReceived,
@@ -55,7 +54,7 @@ const dataReceived = (data) => {
 
     // Bypass state update but pipe data to logger every X responses
     let time = Date.now();
-    // DataLogger.logData(time, data);
+    DataLogger.logData(time, data);
     if (bluetoothConnector) {
         bluetoothConnector.logEngineData(time, data);
     }

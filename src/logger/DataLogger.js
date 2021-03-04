@@ -22,7 +22,7 @@ const logger = (function(){
             console.log("CSV files will be written to: " + filepath);
 
             setInterval(function () {
-                fork('./src/renderer/logger/CsvWriter').send({results, filepath});
+                fork('./src/logger/CsvWriter').send({results, filepath});
                 results = [];
             }, LOG_INTERVAL);
         });
@@ -36,7 +36,7 @@ const logger = (function(){
     }
 
     const findCsvDirectory = () => {
-        let csvDirectory = path.join(__dirname, "logs")
+        let csvDirectory = path.join(__dirname, "logs");
         
         let volumes;
         switch (os.platform()) {
@@ -93,6 +93,6 @@ const logger = (function(){
     }
 
     return this;
-}).call(this);
+}).call(this || {});
 
 export default logger;

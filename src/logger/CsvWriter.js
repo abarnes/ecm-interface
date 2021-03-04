@@ -1,5 +1,7 @@
-import fs from 'fs';
-import { PowerFCCommands } from '../../../serial/PowerFCCommands';
+// import fs from 'fs';
+const fs = require('fs');
+const PowerFCCommands = require("../connectors/powerfc/PowerFCCommands").PowerFCCommands;
+//import { PowerFCCommands } from '..connectors/powerfc/PowerFCCommands';
 
 process.on('message', (message) => {
     if (typeof message.filepath === "undefined" || typeof message.results === "undefined") {
