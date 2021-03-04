@@ -8,12 +8,16 @@ import { startServer as startWebsocketServer } from './websocket/websocketContro
 
 const shouldUseMockData = process.argv.includes("-mock") || process.argv.includes("mock");
 
+const BLUETOOTH_ENABLED = false;
+
 // start data requests
 function startDataRequests() {
     const dataConnector = shouldUseMockData ? MockDataConnector : RealDataConnector;
     const intervalConfigForArch = (process.arch === "arm") ? DataRequestIntervalsARM : DataRequestIntervalsX64;
-    BluetoothConnector.init();
-    DataRetriever.listen(BluetoothConnector, dataConnector, intervalConfigForArch.intervals, function statusUpdate(){});
+    if (BLUETOOTH_ENABLED) {
+        BluetoothConnector.init();
+    }
+    DataRetriever.listen((BLUETOOTH_ENABLED ? BluetoothConnector : null), dataConnector, intervalConfigForArch.intervals, function statusUpdate(){});
 }
 
 // start websockets

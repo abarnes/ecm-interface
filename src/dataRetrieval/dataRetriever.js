@@ -56,7 +56,9 @@ const dataReceived = (data) => {
     // Bypass state update but pipe data to logger every X responses
     let time = Date.now();
     // DataLogger.logData(time, data);
-    bluetoothConnector.logEngineData(time, data);
+    if (bluetoothConnector) {
+        bluetoothConnector.logEngineData(time, data);
+    }
 
     if (skippedUpdateCounter[data.command.hex] < updatesToSkip[data.command.hex]) {
         skippedUpdateCounter[data.command.hex]++;
