@@ -22,7 +22,10 @@ module.exports = {
         "xpc-connection": "xpc-connection"
     },
     resolve: {
-        extensions: ['.js', '.json', '.node']
+        extensions: ['.js', '.json', '.node'],
+        alias: {
+            '@abandonware/bluetooth-hci-socket': process.platform === "darwin" ? path.resolve(__dirname, 'src/utils/EmptyModule.js') : path.resolve(__dirname, 'node_modules/@abandonware/bluetooth-hci-socket')
+        },
     },
     devServer: {
         contentBase: './src',
@@ -52,5 +55,5 @@ module.exports = {
     node: {
         __dirname: process.env.NODE_ENV !== 'production',
         __filename: process.env.NODE_ENV !== 'production'
-    }
+    },
 };

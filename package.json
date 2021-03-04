@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "bindings": "^1.3.0",
-    "bleno": "github:notjosh/bleno",
     "bufferutil": "^4.0.0",
     "convert-hex": "^0.1.0",
     "fs-finder": "^1.8.1",
@@ -24,7 +23,7 @@
     "ws": "^5.2.2"
   },
   "optionalDependencies": {
-    "bleno-mac": "github:notjosh/bleno-mac"
+    "bleno": "github:abandonware/bleno"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
