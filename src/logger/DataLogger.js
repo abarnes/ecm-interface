@@ -37,6 +37,10 @@ const logger = (function(){
 
     const findCsvDirectory = () => {
         let csvDirectory = path.join(__dirname, "logs");
+        if (process.env.NODE_ENV === "production") {
+            csvDirectory = path.join(__dirname, "../", "../", "logs");
+            mkdirp(csvDirectory);
+        }
         
         let volumes;
         switch (os.platform()) {
