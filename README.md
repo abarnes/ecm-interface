@@ -15,7 +15,7 @@ This code runs on any unix environment running NodeJS when connected through USB
 
 Note: if you choose to install a RaspberryPi, the following needs to be handled:
 - 5v power supply to the RaspberryPi
-- Graceful shutdown through either a shutdown button or ignition-switch based trigger
+- Graceful shutdown through either a shutdown button or ignition-switch based trigger. Some add-ons exist that can help such as [this](https://mausberry-circuits.myshopify.com/collections/car-power-supply-switches)
 *Note: 'hard' shutdowns by killing power to the RaspberryPi can cause operating system corruption*
 
 ## Installation
