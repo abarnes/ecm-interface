@@ -19,7 +19,7 @@ Note: if you choose to install a RaspberryPi, the following needs to be handled:
 *Note: 'hard' shutdowns by killing power to the RaspberryPi can cause operating system corruption*
 
 ## Installation
-1. Install NodeJS version 10 on your system. [Download Link](https://nodejs.org/dist/latest-v0.10.x/)
+1. Install NodeJS version 16 on your system. [Download Link](https://nodejs.org/dist/latest-v0.10.x/)
 2. Download the latest release of this project.  It will be a single javascript (main.js) file and a node_modules folder that needs to remain in the same directory as main.js.  
 3. Run this script each time your system boots using the command `node main.js`.  On a RaspberryPi, this can be done through several means. I recommend rc.local as outlined [here](https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/).
 

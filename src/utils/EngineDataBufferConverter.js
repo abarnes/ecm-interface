@@ -24,7 +24,9 @@ const mapBasic = (data) => {
 
     buffer.writeUInt8(parseInt(PowerFCCommands.basic.responseStartByte, 16), 0);
 
-    buffer.writeUIntLE(data.time, 2, 8);
+    
+    console.log(parseInt(data.time, 16));
+    // buffer.writeUIntLE(data.time, 2, 8);
     buffer.writeInt16LE(data.boost, 10);
     buffer.writeUInt8((data.waterTemp + 40), 12);
     buffer.writeUInt8(data.knock, 13);
@@ -44,7 +46,8 @@ const mapAdvancedData = (data) => {
 
     buffer.writeUInt8(parseInt(PowerFCCommands.advancedData.responseStartByte, 16), 0);
 
-    buffer.writeUIntLE(data.time, 2, 8);
+    console.log(parseInt(data.time, 16));
+    // buffer.writeUIntLE(data.time, 2, 8);
     buffer.writeUInt16LE(data.rpm, 10);
     buffer.writeInt16LE(data.intakePressure, 12);
     buffer.writeUInt16LE(Math.round(data.mapSensorVoltage * 10), 14);
@@ -74,8 +77,9 @@ const mapSensorData = (data) => {
     let buffer = new Buffer(42);
 
     buffer.writeUInt8(parseInt(PowerFCCommands.sensorData.responseStartByte, 16), 0);
-
-    buffer.writeUIntLE(data.time, 2, 8);
+    
+    console.log(parseInt(data.time, 16));
+    // buffer.writeUIntLE(data.time, 2, 8);
     buffer.writeUInt16LE(Math.round(data.mapSensorVoltage * 10), 10);
     buffer.writeUInt16LE(Math.round(data.tpsFullRangeVoltage * 10), 12);
     buffer.writeUInt16LE(Math.round(data.tpsNarrowRangeVoltage * 10), 14);
