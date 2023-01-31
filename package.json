@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "author": "Austin Barnes <austin@austinbarnes.net>",
   "license": "MIT",
-
+  "type": "module",
   "scripts": {
     "build": "webpack -p && cp package.json build/ && cd build && npm install --production --no-package-lock && rm package.json",
     "dev": "npm run build && node build/main.js -mock"
