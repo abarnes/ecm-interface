@@ -11,7 +11,7 @@ const shouldUseMockData = process.argv.includes("-mock") || process.argv.include
 const BLUETOOTH_ENABLED = true; // also need to remove 'bleno' override in webpack config
 
 // start data requests
-exports.startDataRequests = function startDataRequests() {
+function startDataRequests() {
     const dataConnector = shouldUseMockData ? MockDataConnector : RealDataConnector;
     const intervalConfigForArch = (process.arch === "arm") ? DataRequestIntervalsARM : DataRequestIntervalsX64;
     if (BLUETOOTH_ENABLED) {
@@ -21,12 +21,16 @@ exports.startDataRequests = function startDataRequests() {
 }
 
 // start websockets
-exports.startWebsockets = function startWebsockets() {
+function startWebsockets() {
     startWebsocketServer()
 }
 
 // startDataRequests();
 // startWebsockets();
 
+module.exports = {
+    startDataRequests, 
+    startWebsockets
+}
 // export default { startDataRequests, startWebsockets };
 
