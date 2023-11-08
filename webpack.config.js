@@ -15,11 +15,11 @@ module.exports = {
     },
     externals: {
         "fs-mock": "fs-mock",
-        "bluetooth-hci-socket": "bluetooth-hci-socket",
-        "serialport": "serialport",
-        "bufferutil": "bufferutil",
-        "utf-8-validate": "utf-8-validate",
-        "xpc-connection": "xpc-connection"
+        // "bluetooth-hci-socket": "bluetooth-hci-socket",
+        // "serialport": "serialport",
+        // "bufferutil": "bufferutil",
+        // "utf-8-validate": "utf-8-validate",
+        // "xpc-connection": "xpc-connection"
     },
     resolve: {
         extensions: ['.js', '.json', '.node'],

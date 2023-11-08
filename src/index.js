@@ -25,12 +25,8 @@ function startWebsockets() {
     startWebsocketServer()
 }
 
-// startDataRequests();
-// startWebsockets();
+startDataRequests();
+startWebsockets();
 
-module.exports = {
-    startDataRequests, 
-    startWebsockets
-}
-// export default { startDataRequests, startWebsockets };
+export default { startDataRequests, startWebsockets };
 
